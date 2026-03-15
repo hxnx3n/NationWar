@@ -49,4 +49,9 @@ public final class Canvas {
             pixel(x2, y, itemStack);
         }
     }
+
+    public void fill(ItemStack itemStack) {
+        for(int i = 0; i < inventory.getSize(); i++)
+            pixel(i, itemStack);
+    }
 }
