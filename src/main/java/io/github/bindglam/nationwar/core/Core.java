@@ -2,12 +2,16 @@ package io.github.bindglam.nationwar.core;
 
 import io.github.bindglam.nationwar.NationWar;
 import io.github.bindglam.nationwar.nation.Nation;
+import io.github.bindglam.nationwar.utils.EntityUtil;
 import io.github.bindglam.nationwar.utils.Named;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -61,10 +65,13 @@ public final class Core implements Named {
             return false;
 
         // TODO : Safe Teleport
-        // TODO : Timed Teleport
-        player.teleportAsync(location);
-
-        cooldownMap.put(player.getUniqueId(), NationWar.get().config().core.teleportCooldown.value());
+        EntityUtil.teleportTimed(player, location, 5,
+                leftSeconds -> { player.sendActionBar(Component.text(leftSeconds + "초 후 이동합니다.").color(NamedTextColor.GREEN)); player.playSound(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1f, 1f); },
+                () -> { player.sendActionBar(Component.text("텔레포트가 취소되었습니다.").color(NamedTextColor.RED)); player.playSound(player, Sound.ENTITY_ITEM_BREAK, 1f, 1f); },
+                () -> {
+                    player.playSound(player, Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f);
+                    cooldownMap.put(player.getUniqueId(), NationWar.get().config().core.teleportCooldown.value());
+                });
         return true;
     }
 }
