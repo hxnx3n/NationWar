@@ -1,6 +1,7 @@
 package io.github.bindglam.nationwar.command;
 
 import io.github.bindglam.nationwar.Context;
+import io.github.bindglam.nationwar.core.Core;
 import io.github.bindglam.nationwar.nation.Nation;
 import io.github.bindglam.nationwar.utils.PlayerUtil;
 import net.kyori.adventure.text.Component;
@@ -9,7 +10,10 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.incendo.cloud.bukkit.BukkitCommandManager;
+import org.incendo.cloud.bukkit.parser.OfflinePlayerParser;
+import org.incendo.cloud.bukkit.parser.PlayerParser;
 import org.incendo.cloud.parser.standard.StringParser;
 import org.incendo.cloud.permission.Permission;
 import org.incendo.cloud.suggestion.Suggestion;
@@ -59,6 +63,7 @@ public final class NationCommand implements CommandRegistrar {
                 }));
 
         member(context, commands);
+        core(context, commands);
     }
 
     private void member(Context context, BukkitCommandManager<CommandSender> commands) {
@@ -131,6 +136,35 @@ public final class NationCommand implements CommandRegistrar {
                         ctx.sender().sendMessage(Component.text("해당 국가에 소속된 멤버인지 확인해주세요!").color(NamedTextColor.RED));
                     } else {
                         ctx.sender().sendMessage(Component.text("성공적으로 '" + target.getName() + "'님을 '" + nation.getName() + "' 국가에서 삭제시켰습니다.").color(NamedTextColor.GREEN));
+                    }
+                }));
+    }
+
+    private void core(Context context, BukkitCommandManager<CommandSender> commands) {
+        commands.command(commands.commandBuilder("국가")
+                .permission(Permission.of("nationwar.admin"))
+                .literal("신상")
+                .literal("점령")
+                .required("플레이어", PlayerParser.playerParser())
+                .required("신상", StringParser.quotedStringParser())
+                .handler(ctx -> {
+                    Player whoOccupied = ctx.get("플레이어");
+                    Core core = context.plugin().getCoreManager().getCore(ctx.get("신상"));
+                    if(core == null) {
+                        ctx.sender().sendMessage(Component.text("알 수 없는 신상입니다.").color(NamedTextColor.RED));
+                        return;
+                    }
+
+                    Nation nation = context.plugin().getNationManager().getNationByMember(whoOccupied.getUniqueId());
+                    if(nation == null) {
+                        ctx.sender().sendMessage(Component.text("해당 플레이어는 국가에 소속되지 않았습니다.").color(NamedTextColor.RED));
+                        return;
+                    }
+
+                    if(!nation.occupyCore(whoOccupied, core)) {
+                        ctx.sender().sendMessage(Component.text("해당 신상을 점령하는 데 실패했습니다.").color(NamedTextColor.RED));
+                    } else {
+                        ctx.sender().sendMessage(Component.text("성공적으로 '" + whoOccupied.getName() + "'님이 '" + core.getName() + "' 신상을 점령하게 했습니다.").color(NamedTextColor.GREEN));
                     }
                 }));
     }
