@@ -36,7 +36,7 @@ public final class Nation implements Named {
             return false; // 이미 점령함
 
         if(core.getOwnerNation() != null) // 다른 국가가 점령했다면?
-            core.getOwnerNation().getOwnedCores().remove(core);
+            core.getOwnerNation().deoccupyCore(core);
         core.setOwnerNation(this);
         ownedCores.add(core);
 
@@ -51,6 +51,15 @@ public final class Nation implements Named {
             ));
         });
 
+        return true;
+    }
+
+    public boolean deoccupyCore(Core core) {
+        if(core.getOwnerNation() == null || !core.getOwnerNation().getName().equals(name))
+            return false;
+
+        core.setOwnerNation(null);
+        ownedCores.remove(core);
         return true;
     }
 
