@@ -3,7 +3,7 @@ package io.github.bindglam.nationwar;
 import io.github.bindglam.nationwar.command.CommandManager;
 import io.github.bindglam.nationwar.database.DatabaseManager;
 import io.github.bindglam.nationwar.nation.NationManager;
-import io.github.bindglam.nationwar.nation.core.CoreManager;
+import io.github.bindglam.nationwar.core.CoreManager;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.bukkit.plugin.java.JavaPlugin;

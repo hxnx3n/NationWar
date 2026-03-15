@@ -1,8 +1,7 @@
-package io.github.bindglam.nationwar.nation.core;
+package io.github.bindglam.nationwar.core;
 
 import io.github.bindglam.nationwar.nation.Nation;
 import io.github.bindglam.nationwar.utils.Named;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;

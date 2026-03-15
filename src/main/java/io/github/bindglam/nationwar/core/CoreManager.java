@@ -1,8 +1,7 @@
-package io.github.bindglam.nationwar.nation.core;
+package io.github.bindglam.nationwar.core;
 
 import io.github.bindglam.nationwar.Context;
 import io.github.bindglam.nationwar.Managerial;
-import io.github.bindglam.nationwar.nation.NationRepository;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -1,9 +1,8 @@
-package io.github.bindglam.nationwar.nation.core;
+package io.github.bindglam.nationwar.core;
 
 import io.github.bindglam.nationwar.NationWarPlugin;
 import io.github.bindglam.nationwar.database.DatabaseManager;
 import io.github.bindglam.nationwar.database.Repository;
-import io.github.bindglam.nationwar.nation.Nation;
 import io.github.bindglam.nationwar.utils.ObjectUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

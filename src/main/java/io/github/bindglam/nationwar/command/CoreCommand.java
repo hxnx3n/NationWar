@@ -1,7 +1,7 @@
 package io.github.bindglam.nationwar.command;
 
 import io.github.bindglam.nationwar.Context;
-import io.github.bindglam.nationwar.nation.core.Core;
+import io.github.bindglam.nationwar.core.Core;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;

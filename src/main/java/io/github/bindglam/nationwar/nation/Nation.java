@@ -1,7 +1,7 @@
 package io.github.bindglam.nationwar.nation;
 
 import io.github.bindglam.nationwar.NationWar;
-import io.github.bindglam.nationwar.nation.core.Core;
+import io.github.bindglam.nationwar.core.Core;
 import io.github.bindglam.nationwar.utils.Named;
 import lombok.Getter;
 import lombok.Setter;

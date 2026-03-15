@@ -2,24 +2,19 @@ package io.github.bindglam.nationwar.command;
 
 import io.github.bindglam.nationwar.Context;
 import io.github.bindglam.nationwar.nation.Nation;
-import io.github.bindglam.nationwar.nation.core.Core;
 import io.github.bindglam.nationwar.utils.PlayerUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.incendo.cloud.bukkit.BukkitCommandManager;
-import org.incendo.cloud.bukkit.parser.location.LocationParser;
-import org.incendo.cloud.parser.standard.IntegerParser;
 import org.incendo.cloud.parser.standard.StringParser;
 import org.incendo.cloud.permission.Permission;
 import org.incendo.cloud.suggestion.Suggestion;
 import org.incendo.cloud.suggestion.SuggestionProvider;
 
-import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
 public final class NationCommand implements CommandRegistrar {
