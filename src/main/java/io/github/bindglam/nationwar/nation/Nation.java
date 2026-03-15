@@ -34,6 +34,8 @@ public final class Nation implements Named {
     public boolean occupyCore(Player whoOccupied, Core core) {
         if(core.getOwnerNation() != null && core.getOwnerNation().getName().equals(name))
             return false; // 이미 점령함
+        if(!members.contains(whoOccupied.getUniqueId()))
+            return false;
 
         if(core.getOwnerNation() != null) // 다른 국가가 점령했다면?
             core.getOwnerNation().deoccupyCore(core);
